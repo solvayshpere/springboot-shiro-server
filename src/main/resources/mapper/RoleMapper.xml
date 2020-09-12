@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.solvay.shiro.dao.RoleMapper">
+    <insert id="addPermission">
+        insert into sys_role_permission(role_id,permission_id) values (#{rid}, #{pid})
+    </insert>
+
+    <delete id="delPermission">
+        delete from sys_role_permission where role_id=#{rid} and permission_id=#{pid}
+    </delete>
+
+    <!-- 查询用户信息 -->
+    <select id="findRolesByUserId" resultType="com.solvay.shiro.entity.Role">
+        SELECT r.* from sys_role r LEFT JOIN sys_user_role ur on r.id = ur.role_id where ur.uid  = #{uid}
+    </select>
+</mapper>
